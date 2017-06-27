@@ -17,7 +17,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Mastermind.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Mastermind.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../mastermind/src/js/components/Mastermind.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
@@ -25,6 +25,16 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../mastermind/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -117,6 +127,7 @@
         <option value="$PROJECT_DIR$/../mastermind/src/scss/base/_variables.scss" />
         <option value="$PROJECT_DIR$/../mastermind/src/scss/main.scss" />
         <option value="$PROJECT_DIR$/../mastermind/src/js/components/Mastermind.jsx" />
+        <option value="$PROJECT_DIR$/../mastermind/.gitignore" />
       </list>
     </option>
   </component>
@@ -339,12 +350,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498501772219</updated>
-      <workItem from="1498501775544" duration="21881000" />
+      <workItem from="1498501775544" duration="22083000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21881000" />
+    <option name="totallyTimeSpent" value="22083000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1158" y="23" width="1390" height="1292" extended-state="0" />
@@ -369,6 +380,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.gitignore" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -528,6 +542,14 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mastermind/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
