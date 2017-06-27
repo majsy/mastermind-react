@@ -1,0 +1,10 @@
+
+
+// Base
+@import 'base/variables';
+
+h1 {
+  &.title {
+    color: $pink;
+  }
+}
