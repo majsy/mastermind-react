@@ -2,6 +2,15 @@
 
 // Base
 @import 'base/variables';
+@import 'base/mixins';
+
+// Layout
+@import 'layout/container';
+
+// Components
+@import 'components/peg';
+@import 'components/board';
+@import 'components/row';
 
 h1 {
   &.title {

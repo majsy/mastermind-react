@@ -1,0 +1,25 @@
+.peg {
+  @include size(30px);
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+
+  &.yellow {
+    background-color: $yellow;
+  }
+  &.orange {
+    background-color: $orange;
+  }
+  &.red {
+    background-color: $red;
+  }
+  &.pink {
+    background-color: $pink;
+  }
+  &.green {
+    background-color: $green;
+  }
+  &.blue {
+    background-color: $blue;
+  }
+}

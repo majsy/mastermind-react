@@ -4,8 +4,8 @@ import Peg from './Peg.jsx';
 export default class DecodeRow extends React.Component {
     render() {
         return (
-            <div>
-                <h1>decode row</h1>
+            <div className="decode-row">
+                <h2>decode row</h2>
                 <Peg />
             </div>
         )

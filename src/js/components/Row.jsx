@@ -6,8 +6,7 @@ import HintsRow from './HintsRow.jsx';
 export default class Row extends React.Component {
     render() {
         return (
-            <div>
-                <h1>row</h1>
+            <div className="row">
                 <DecodeRow />
                 <SubmitButton />
                 <HintsRow />

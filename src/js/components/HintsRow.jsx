@@ -4,8 +4,7 @@ import Hint from './Hint.jsx';
 export default class HintsRow extends React.Component {
     render() {
         return (
-            <div>
-                <h1>hints row</h1>
+            <div className="hints-row">
                 <Hint />
             </div>
         )

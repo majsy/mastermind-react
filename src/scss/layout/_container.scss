@@ -1,0 +1,11 @@
+.main-container {
+  @include size(90%, auto);
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1000px;
+}
+
+.game-container {
+  display: flex;
+  justify-content: flex-start;
+}
