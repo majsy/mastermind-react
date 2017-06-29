@@ -15,6 +15,7 @@ export default class Mastermind extends React.Component {
                 {color: 'blue'},
                 {color: 'green'}
             ],
+            row: 0,
             codedPegs:[],
             decodedPegs:[]
         };
@@ -22,6 +23,35 @@ export default class Mastermind extends React.Component {
     componentDidMount() {
         this.setCodedPegs();
     }
+
+    setSelectedPegs = (color) => {
+        let decodedPegs = this.state.decodedPegs;
+        decodedPegs.push(color);
+
+        if(decodedPegs.length > 4) {
+            decodedPegs.splice(0, 1);
+        }
+
+        this.setState({decodedPegs: decodedPegs});
+        console.log(this.state.decodedPegs);
+    }
+
+    submitPegs = () => {
+        console.log(this.state.decodedPegs);
+        this.updateRow();
+
+    }
+
+    updateRow = () => {
+        this.setState({row: this.state.row + 1});
+        console.log(this.state.row);
+        this.checkRow();
+    }
+
+    checkRow = () => {
+        console.log('check to see if pegs are correct');
+    }
+
     setCodedPegs = (pegs) => {
         pegs = this.state.pegs;
         let codedPegs;
@@ -40,8 +70,10 @@ export default class Mastermind extends React.Component {
             <div className="main-container">
                 <h1 className="title">Mastermind</h1>
                 <div className="game-container">
-                    <Board codedPegs={this.state.codedPegs} />
-                    <CodePegs pegs={this.state.pegs} decodedPegs={this.state.decodedPegs} />
+                    <Board submitPegs={this.submitPegs} decodedPegs={this.state.decodedPegs} />
+                    <CodePegs setSelectedPegs={this.setSelectedPegs}
+                          pegs={this.state.pegs}
+                    />
                 </div>
             </div>
         )
