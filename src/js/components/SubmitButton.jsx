@@ -9,7 +9,7 @@ export default class SubmitButton extends React.Component {
 
         let enabled = false;
 
-        if (length === 4 && this.props.index === 0) {
+        if (length === 4 && this.props.index === this.props.row) {
             enabled = true;
         }
 

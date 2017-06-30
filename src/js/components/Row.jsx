@@ -4,15 +4,37 @@ import SubmitButton from './SubmitButton.jsx';
 import HintsRow from './HintsRow.jsx';
 
 export default class Row extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            savedPegs: [],
+            isSaved: false
+        };
+    }
     handleClick = () => {
         this.props.handleClick();
     }
+    componentWillUpdate(nextProps) {
+        // console.log(this.props, nextProps);
+        if (this.props.row === this.props.index && nextProps.row !== this.props.index && !this.state.isSaved) {
+            // console.log('save!', this.props.decodedPegs.slice(0));
+            this.setState({isSaved: true, savedPegs: this.props.decodedPegs.slice(0)});
+        }
+    }
     render() {
+        const pegs = this.state.isSaved ? this.state.savedPegs : this.props.decodedPegs;
+        // console.log('pegs', pegs, this.props.index);
         return (
             <div className="row">
-                <DecodeRow />
-                <SubmitButton index={this.props.index} handleClick={this.handleClick}
-                      decodedPegs={this.props.decodedPegs} />
+                <DecodeRow decodedPegs={pegs}
+                    isSaved={this.state.isSaved}
+                    row={this.props.row}
+                    index={this.props.index}
+                />
+                <SubmitButton index={this.props.index}
+                    handleClick={this.handleClick}
+                    decodedPegs={this.props.decodedPegs}
+                    row={this.props.row} />
                 <HintsRow />
             </div>
         )

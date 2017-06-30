@@ -7,14 +7,14 @@ export default class Board extends React.Component {
 
         this.state = {
             rows: [
+                {id:0},
                 {id:1},
                 {id:2},
                 {id:3},
                 {id:4},
                 {id:5},
                 {id:6},
-                {id:7},
-                {id:8}
+                {id:7}
             ]
         }
     }
@@ -23,7 +23,11 @@ export default class Board extends React.Component {
     }
     render() {
         let rows = this.state.rows.map((row, i)=> {
-            return <Row index={i} key={row.id} handleClick={this.handleClick} decodedPegs={this.props.decodedPegs} />
+            return <Row index={i} key={row.id}
+                handleClick={this.handleClick}
+                pegs={this.props.pegs}
+                decodedPegs={this.props.decodedPegs}
+                row={this.props.row} />
         })
         return (
             <div className="board">

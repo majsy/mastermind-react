@@ -3,10 +3,18 @@ import Peg from './Peg.jsx';
 
 export default class DecodeRow extends React.Component {
     render() {
+        let decodedPegs = this.props.decodedPegs.map((color, index) => {
+            if (this.props.index === this.props.row || this.props.isSaved) {
+                return (
+                    <Peg key={index}
+                         className={`peg ${color}`}
+                         color={color}  />
+                )
+            }
+        })
         return (
             <div className="decode-row">
-                <h2>decode row</h2>
-                <Peg />
+                <div>{decodedPegs}</div>
             </div>
         )
     }
