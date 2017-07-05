@@ -7,18 +7,11 @@ export default class Mastermind extends React.Component {
         super();
 
         this.state = {
-            pegs: [
-                {color: 'yellow'},
-                {color: 'orange'},
-                {color: 'red'},
-                {color: 'pink'},
-                {color: 'blue'},
-                {color: 'green'}
-            ],
+            pegs: ['yellow', 'orange', 'red', 'pink', 'blue', 'green'],
             row: 0,
             codedPegs:[],
             decodedPegs:[],
-            decodeHistory: []
+            hints: false
         };
     }
     componentDidMount() {
@@ -26,16 +19,15 @@ export default class Mastermind extends React.Component {
     }
     setCodedPegs = (pegs) => {
         pegs = this.state.pegs;
-        let codedPegs;
+        let codedPegs = [];
 
         for (let i = 0; i < 4; i++) {
             let codedPeg = pegs[Math.floor(Math.random() * pegs.length)];
-            codedPegs = this.state.codedPegs.push(codedPeg);
+            codedPegs.push(codedPeg);
         }
         this.setState({codedPegs: codedPegs});
 
-        // this.state.codedPegs.map((peg) => console.log(peg.color));
-        console.log(this.state.codedPegs);
+        console.log(codedPegs);
     }
     setSelectedPegs = (color) => {
         let decodedPegs = this.state.decodedPegs;
@@ -44,20 +36,42 @@ export default class Mastermind extends React.Component {
         if (decodedPegs.length > 4) {
             decodedPegs.splice(0, 1);
         }
+
         this.setState({decodedPegs: decodedPegs});
-        console.log(this.state.decodedPegs);
+        console.log(decodedPegs);
     }
     submitPegs = () => {
         this.updateRow();
     }
     updateRow = () => {
         this.setState({row: this.state.row + 1});
-        this.checkRow();
-        // this.setState({decodedHistory: this.state.decodedPegs})
+        this.compareArrays();
         this.setState({decodedPegs: []});
     }
-    checkRow = () => {
-        console.log(`check to see if: '${this.state.decodedPegs}' is correct`);
+    compareArrays = () => {
+        let codedPegs = this.state.codedPegs;
+        let decodedPegs = this.state.decodedPegs;
+
+        console.log("codedPegs ", codedPegs);
+        console.log("DEcodedPegs ", decodedPegs);
+
+        if (codedPegs.length === decodedPegs.length) {
+
+            decodedPegs.forEach((color, i) => {
+                if (codedPegs.includes(decodedPegs[i])) {
+                    let decodedPegIndex = decodedPegs.indexOf(decodedPegs[i]);
+
+                    codedPegs.forEach((color, i) => {
+                        let codedPegIndex = codedPegs.indexOf(codedPegs[i]);
+                        if (decodedPegIndex === codedPegIndex) {
+                            console.log('matched peg index:' + decodedPegIndex);
+                        }
+                    })
+                } else {
+                    console.log('no match!');
+                }
+            });
+        }
     }
     render() {
         return (
