@@ -1,17 +1,18 @@
 import React from 'react';
 import Board from './Board.jsx';
 import CodePegs from './CodePegs.jsx';
+import {PEG_COLORS} from "../common/peg-colors";
 
 export default class Mastermind extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            pegs: ['yellow', 'orange', 'red', 'pink', 'blue', 'green'],
+            pegs: PEG_COLORS,
             row: 0,
             codedPegs:[],
             decodedPegs:[],
-            hints: false
+            hints: []
         };
     }
     componentDidMount() {
@@ -29,6 +30,7 @@ export default class Mastermind extends React.Component {
 
         console.log(codedPegs);
     }
+    
     setSelectedPegs = (color) => {
         let decodedPegs = this.state.decodedPegs;
         decodedPegs.push(color);
