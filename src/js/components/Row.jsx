@@ -8,7 +8,8 @@ export default class Row extends React.Component {
         super(props);
         this.state = {
             savedPegs: [],
-            isSaved: false
+            isSaved: false,
+            hints: []
         };
     }
     handleClick = () => {
@@ -32,7 +33,7 @@ export default class Row extends React.Component {
                     handleClick={this.handleClick}
                     decodedPegs={this.props.decodedPegs}
                     row={this.props.row} />
-                <HintsRow />
+                <HintsRow hints={this.props.hints} />
             </div>
         )
     }

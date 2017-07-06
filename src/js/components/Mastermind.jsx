@@ -2,6 +2,7 @@ import React from 'react';
 import Board from './Board.jsx';
 import CodePegs from './CodePegs.jsx';
 import {PEG_COLORS} from "../common/peg-colors";
+import {HINT_TYPES} from "../common/hint-types";
 
 export default class Mastermind extends React.Component {
     constructor() {
@@ -46,33 +47,40 @@ export default class Mastermind extends React.Component {
         this.updateRow();
     }
     updateRow = () => {
-        this.setState({row: this.state.row + 1});
         this.compareArrays();
-        this.setState({decodedPegs: []});
+        this.setState({row: this.state.row + 1, decodedPegs: []});
     }
     compareArrays = () => {
         let codedPegs = this.state.codedPegs;
         let decodedPegs = this.state.decodedPegs;
+        let hints = [];
 
         console.log("codedPegs ", codedPegs);
         console.log("DEcodedPegs ", decodedPegs);
 
         if (codedPegs.length === decodedPegs.length) {
 
-            decodedPegs.forEach((color, i) => {
-                if (codedPegs.includes(decodedPegs[i])) {
-                    let decodedPegIndex = decodedPegs.indexOf(decodedPegs[i]);
-
-                    codedPegs.forEach((color, i) => {
-                        let codedPegIndex = codedPegs.indexOf(codedPegs[i]);
-                        if (decodedPegIndex === codedPegIndex) {
-                            console.log('matched peg index:' + decodedPegIndex);
+            decodedPegs.forEach((decodedPegColor, decodedPegIndex) => {
+                
+                const indexesOfColor = codedPegs.reduce((acc, codedPegColor, idx) => {
+                        if (codedPegColor === decodedPegColor) {
+                            acc.push(idx);
                         }
-                    })
-                } else {
-                    console.log('no match!');
+
+                        return acc;
+                    }, []);
+
+                const isCorrectColor = codedPegs.includes(decodedPegColor);
+                const isCorrectPosition = indexesOfColor.indexOf(decodedPegIndex) !== -1;
+
+                if (isCorrectColor && isCorrectPosition) {
+                    hints.push(HINT_TYPES.RIGHT_COLOR_RIGHT_POSITION);
+                } else if (isCorrectColor) {
+                    hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION);
                 }
             });
+
+            this.setState({ hints: hints });
         }
     }
     render() {
@@ -80,10 +88,12 @@ export default class Mastermind extends React.Component {
             <div className="main-container">
                 <h1 className="title">Mastermind</h1>
                 <div className="game-container">
-                    <Board submitPegs={this.submitPegs}
-                       decodedPegs={this.state.decodedPegs}
-                       row={this.state.row}
-                       pegs={this.state.pegs}
+                    <Board
+                        submitPegs={this.submitPegs}
+                        decodedPegs={this.state.decodedPegs}
+                        row={this.state.row}
+                        pegs={this.state.pegs}
+                        hints={this.state.hints}
                     />
                     <CodePegs setSelectedPegs={this.setSelectedPegs}
                         pegs={this.state.pegs}

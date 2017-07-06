@@ -24,6 +24,7 @@ export default class Board extends React.Component {
     render() {
         let rows = this.state.rows.map((row, i)=> {
             return <Row index={i} key={row.id}
+                hints={this.props.hints}
                 handleClick={this.handleClick}
                 pegs={this.props.pegs}
                 decodedPegs={this.props.decodedPegs}

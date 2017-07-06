@@ -5,7 +5,7 @@ export default class HintsRow extends React.Component {
     render() {
         return (
             <div className="hints-row">
-                <Hint />
+                {this.props.hints.map(hint => <Hint hint={hint} />)}
             </div>
         )
     }
