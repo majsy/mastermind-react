@@ -1,0 +1,16 @@
+.hint {
+  @include size(15px);
+  border-radius: 50%;
+  display: inline-block;
+  margin: 2px;
+
+  &.RIGHT_COLOR_RIGHT_POSITION {
+    background-color: $red;
+    border: 1px solid $red;
+  }
+
+  &.RIGHT_COLOR_WRONG_POSITION {
+    border: 1px solid grey;
+  }
+}
+

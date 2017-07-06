@@ -1,9 +1,21 @@
 .row {
   border: 1px solid lightgrey;
   margin: 10px;
-  display: flex
+  display: flex;
+  @include size(auto, 80px);
+  align-items: center;
+}
+
+.decode-row,
+.hints-row {
+  display: flex;
+  justify-content: center;
 }
 
 .decode-row {
   width: 60%;
+}
+
+.hints-row {
+  width: 20%;
 }

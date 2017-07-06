@@ -13,7 +13,7 @@ export default class SubmitButton extends React.Component {
             enabled = true;
         }
 
-        return <button className="" type="button" onClick={this.handleClick}
-            disabled={!enabled}>check</button>
+        return <button className="submit-button" type="button" onClick={this.handleClick}
+            disabled={!enabled}><p>check</p></button>
     }
 }

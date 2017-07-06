@@ -58,23 +58,45 @@ export default class Mastermind extends React.Component {
         console.log("codedPegs ", codedPegs);
         console.log("DEcodedPegs ", decodedPegs);
 
+        // let temp = codedPegs;
+        // let x = decodedPegs.map((color, k) => {
+        //     let matchType = false;
+        //     let i = 0;
+        //     while (i < temp.length) {
+        //         if (temp[i] === color && k === i) {
+        //             matchType = 'Red';
+        //             temp[i] = false;
+        //             break;
+        //         } else if (temp[i] === color && k !== i) {
+        //             matchType = 'White';
+        //             temp[i] = false;
+        //             break;
+        //         }
+        //         i++;
+        //     }
+        //
+        //     return matchType;
+        // });
+        //
+        // console.log(x);
+
         if (codedPegs.length === decodedPegs.length) {
 
             decodedPegs.forEach((decodedPegColor, decodedPegIndex) => {
-                
-                const indexesOfColor = codedPegs.reduce((acc, codedPegColor, idx) => {
-                        if (codedPegColor === decodedPegColor) {
-                            acc.push(idx);
-                        }
 
-                        return acc;
-                    }, []);
+                const indexesOfColor = codedPegs.reduce((acc, codedPegColor, i) => {
+                    if (codedPegColor === decodedPegColor) {
+                        acc.push(i);
+                    }
+                    return acc;
+                }, []);
 
                 const isCorrectColor = codedPegs.includes(decodedPegColor);
                 const isCorrectPosition = indexesOfColor.indexOf(decodedPegIndex) !== -1;
 
                 if (isCorrectColor && isCorrectPosition) {
                     hints.push(HINT_TYPES.RIGHT_COLOR_RIGHT_POSITION);
+                    decodedPegColor[decodedPegIndex] = false;
                 } else if (isCorrectColor) {
                     hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION);
                 }

@@ -11,6 +11,6 @@ export default class CodePegs extends React.Component {
                 handleClick={this.selectPeg}
                 color={color}  />
         });
-        return <div>{pegs}</div>
+        return <div className="code-pegs-container">{pegs}</div>
     }
 }
