@@ -8,24 +8,31 @@ export default class Row extends React.Component {
         super(props);
         this.state = {
             savedPegs: [],
-            isSaved: false,
-            hints: []
+            pegIsSaved: false,
+            savedHints: [],
+            hintIsSaved: false,
         };
     }
     handleClick = () => {
         this.props.handleClick();
     }
     componentWillUpdate(nextProps) {
-        if (this.props.row === this.props.index && nextProps.row !== this.props.index && !this.state.isSaved) {
-            this.setState({isSaved: true, savedPegs: this.props.decodedPegs.slice(0)});
+        if (this.props.row === this.props.index && nextProps.row !== this.props.index && !this.state.pegIsSaved) {
+            this.setState({pegIsSaved: true, savedPegs: this.props.decodedPegs.slice(0)});
+
+            if (!this.state.hintIsSaved) {
+                this.setState({hintIsSaved: true, savedHints: this.props.hints.slice(0)});
+            }
         }
     }
     render() {
-        const pegs = this.state.isSaved ? this.state.savedPegs : this.props.decodedPegs;
+        const pegs = this.state.pegIsSaved ? this.state.savedPegs : this.props.decodedPegs;
+        const hints = this.state.hintIsSaved ? this.state.savedHints : this.props.hints;
+
         return (
             <div className="row">
                 <DecodeRow decodedPegs={pegs}
-                    isSaved={this.state.isSaved}
+                    pegIsSaved={this.state.pegIsSaved}
                     row={this.props.row}
                     index={this.props.index}
                 />
@@ -33,7 +40,11 @@ export default class Row extends React.Component {
                     handleClick={this.handleClick}
                     decodedPegs={this.props.decodedPegs}
                     row={this.props.row} />
-                <HintsRow hints={this.props.hints} />
+                <HintsRow hints={hints}
+                    hintIsSaved={this.state.hintIsSaved}
+                    index={this.props.index}
+                    row={this.props.row}
+                />
             </div>
         )
     }

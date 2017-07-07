@@ -7,11 +7,7 @@ export default class SubmitButton extends React.Component {
     render() {
         let length =  this.props.decodedPegs.length;
 
-        let enabled = false;
-
-        if (length === 4 && this.props.index === this.props.row) {
-            enabled = true;
-        }
+        let enabled = (length === 4 && this.props.index === this.props.row);
 
         return <button className="submit-button" type="button" onClick={this.handleClick}
             disabled={!enabled}><p>check</p></button>

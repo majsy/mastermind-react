@@ -48,56 +48,36 @@ export default class Mastermind extends React.Component {
     }
     updateRow = () => {
         this.compareArrays();
-        this.setState({row: this.state.row + 1, decodedPegs: []});
+        this.setState({row: this.state.row + 1, decodedPegs: [], hints: []});
     }
     compareArrays = () => {
         let codedPegs = this.state.codedPegs;
         let decodedPegs = this.state.decodedPegs;
-        let hints = [];
+        let hints = this.state.hints;
 
         console.log("codedPegs ", codedPegs);
         console.log("DEcodedPegs ", decodedPegs);
 
-        // let temp = codedPegs;
-        // let x = decodedPegs.map((color, k) => {
-        //     let matchType = false;
-        //     let i = 0;
-        //     while (i < temp.length) {
-        //         if (temp[i] === color && k === i) {
-        //             matchType = 'Red';
-        //             temp[i] = false;
-        //             break;
-        //         } else if (temp[i] === color && k !== i) {
-        //             matchType = 'White';
-        //             temp[i] = false;
-        //             break;
-        //         }
-        //         i++;
-        //     }
-        //
-        //     return matchType;
-        // });
-        //
-        // console.log(x);
-
         if (codedPegs.length === decodedPegs.length) {
+            const skipPegs = [];
 
             decodedPegs.forEach((decodedPegColor, decodedPegIndex) => {
 
-                const indexesOfColor = codedPegs.reduce((acc, codedPegColor, i) => {
+                const indexesOfColorInCodedPegs = codedPegs.reduce((acc, codedPegColor, i) => {
                     if (codedPegColor === decodedPegColor) {
                         acc.push(i);
                     }
                     return acc;
+
                 }, []);
 
                 const isCorrectColor = codedPegs.includes(decodedPegColor);
-                const isCorrectPosition = indexesOfColor.indexOf(decodedPegIndex) !== -1;
+                const isCorrectPosition = indexesOfColorInCodedPegs.includes(decodedPegIndex);
 
                 if (isCorrectColor && isCorrectPosition) {
+                    skipPegs.push(decodedPegColor);
                     hints.push(HINT_TYPES.RIGHT_COLOR_RIGHT_POSITION);
-                    decodedPegColor[decodedPegIndex] = false;
-                } else if (isCorrectColor) {
+                } else if (isCorrectColor && !skipPegs.includes(decodedPegColor)) {
                     hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION);
                 }
             });

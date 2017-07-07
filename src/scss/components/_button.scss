@@ -1,5 +1,12 @@
 .submit-button {
   @include size(80px, calc(100% - 25px));
+  transition: transform 200ms ease-out;
+
+  &:enabled {
+    &:hover {
+      transform: scale(.95);
+    }
+  }
 
   p {
     font-weight: bold;
