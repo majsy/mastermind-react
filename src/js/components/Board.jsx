@@ -1,5 +1,7 @@
 import React from 'react';
 import Row from './Row.jsx';
+import ReloadButton from './ReloadButton.jsx';
+import ResultContainer from './ResultContainer.jsx';
 
 export default class Board extends React.Component {
     constructor() {
@@ -21,6 +23,10 @@ export default class Board extends React.Component {
     handleClick = () => {
         this.props.submitPegs();
     }
+
+    reloadPage = () => {
+        this.props.reloadPage();
+    }
     render() {
         let rows = this.state.rows.map((row, i)=> {
             return <Row index={i} key={row.id}
@@ -30,9 +36,14 @@ export default class Board extends React.Component {
                 decodedPegs={this.props.decodedPegs}
                 row={this.props.row} />
         })
+
         return (
-            <div className="board">
-                {rows}
+            <div className="board-container">
+                <div className="board">
+                    {rows}
+                </div>
+                {this.props.resultIsVisible ? <ResultContainer codedPegs={this.props.codedPegs} /> : null }
+                <ReloadButton reloadButtonIsVisible={this.props.reloadButtonIsVisible} reloadPage={this.reloadPage} />
             </div>
         )
     }

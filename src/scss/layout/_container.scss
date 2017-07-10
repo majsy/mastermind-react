@@ -17,3 +17,11 @@
   align-items: center;
   flex-direction: column;
 }
+
+.board-container {
+  @include size(80%, auto);
+}
+
+.result-container {
+  margin: 30px 0;
+}

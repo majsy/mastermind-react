@@ -1,8 +1,8 @@
 .peg {
   @include size(35px);
   border-radius: 50%;
-  margin: 10px;
   border: none;
+  margin: 0 15px 0 0;
 
   &.yellow {
     background-color: $yellow;
@@ -28,6 +28,7 @@
   display: block;
   cursor: pointer;
   transition: transform 200ms ease-out;
+  margin: 10px;
 
   &:hover {
     transform: scale(.95);
