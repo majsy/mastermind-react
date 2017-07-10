@@ -53,36 +53,25 @@ export default class Mastermind extends React.Component {
     compareArrays = () => {
         let codedPegs = this.state.codedPegs;
         let decodedPegs = this.state.decodedPegs;
-        let hints = this.state.hints;
 
         console.log("codedPegs ", codedPegs);
         console.log("DEcodedPegs ", decodedPegs);
 
+
         if (codedPegs.length === decodedPegs.length) {
-            const skipPegs = [];
+            let hints = this.state.hints;
 
-            decodedPegs.forEach((decodedPegColor, decodedPegIndex) => {
+            const pegsInCorrectPosition = decodedPegs.filter((color, idx) => codedPegs[idx] === color);
 
-                const indexesOfColorInCodedPegs = codedPegs.reduce((acc, codedPegColor, i) => {
-                    if (codedPegColor === decodedPegColor) {
-                        acc.push(i);
-                    }
-                    return acc;
+            const pegsInWrongPosition = decodedPegs
+                .filter(color => codedPegs.includes(color) && pegsInCorrectPosition.includes(color) === false);
 
-                }, []);
+            pegsInCorrectPosition
+                .forEach(color => hints.push(HINT_TYPES.RIGHT_COLOR_RIGHT_POSITION));
+            pegsInWrongPosition
+                .forEach(color => hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION));
 
-                const isCorrectColor = codedPegs.includes(decodedPegColor);
-                const isCorrectPosition = indexesOfColorInCodedPegs.includes(decodedPegIndex);
-
-                if (isCorrectColor && isCorrectPosition) {
-                    skipPegs.push(decodedPegColor);
-                    hints.push(HINT_TYPES.RIGHT_COLOR_RIGHT_POSITION);
-                } else if (isCorrectColor && !skipPegs.includes(decodedPegColor)) {
-                    hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION);
-                }
-            });
-
-            this.setState({ hints: hints });
+            this.setState({hints: hints});
         }
     }
     render() {
