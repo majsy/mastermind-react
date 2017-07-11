@@ -55,7 +55,6 @@ export default class Mastermind extends React.Component {
             if (acc[peg] === undefined) {
                 acc[peg] = 0;
             }
-
             acc[peg]++;
 
             return acc;
@@ -82,8 +81,7 @@ export default class Mastermind extends React.Component {
                 }
             }
 
-            Object.keys(decodedColorCount)
-                .forEach(color => {
+            Object.keys(decodedColorCount).forEach(color => {
                 const count = decodedColorCount[color];
                 const colorMatches = Math.min(count, (codedColorCount[color] || 0));
 
@@ -91,7 +89,6 @@ export default class Mastermind extends React.Component {
                     hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION);
                 }
             });
-
             this.setState({hints: hints});
         }
         this.endGame();
