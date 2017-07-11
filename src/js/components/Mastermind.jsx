@@ -52,30 +52,52 @@ export default class Mastermind extends React.Component {
         this.compareArrays();
         this.setState({row: this.state.row + 1, decodedPegs: [], hints: []});
     }
-    compareArrays = () => {
+
+    getColorCount(pegSet) {
+        return pegSet.reduce((acc, peg) => {
+            if (acc[peg] === undefined) {
+                acc[peg] = 0;
+            }
+
+            acc[peg]++;
+
+            return acc;
+        }, {});
+    }
+
+    compareArrays() {
         let codedPegs = this.state.codedPegs;
         let decodedPegs = this.state.decodedPegs;
         let hints = this.state.hints;
 
-        // console.log("codedPegs ", codedPegs);
-        // console.log("DEcodedPegs ", decodedPegs);
+        const decodedColorCount = this.getColorCount(decodedPegs);
+        const codedColorCount = this.getColorCount(codedPegs);
 
         if (codedPegs.length === decodedPegs.length) {
+            for (let i = 0; i < decodedPegs.length; i++) {
+                const decodedColor = decodedPegs[i];
+                const codedColor = codedPegs[i];
 
-            const pegsInCorrectPosition = decodedPegs.filter((color, i) => codedPegs[i] === color);
+                if (decodedColor === codedColor) {
+                    hints.push(HINT_TYPES.RIGHT_COLOR_RIGHT_POSITION);
+                    decodedColorCount[decodedColor]--;
+                    codedColorCount[decodedColor]--;
+                }
+            }
 
-            const pegsInWrongPosition = decodedPegs
-                .filter(color => codedPegs.includes(color) && !pegsInCorrectPosition.includes(color));
+            Object.keys(decodedColorCount)
+                .forEach(color => {
+                const count = decodedColorCount[color];
+                const colorMatches = Math.min(count, (codedColorCount[color] || 0));
 
-            pegsInCorrectPosition
-                .forEach(color => hints.push(HINT_TYPES.RIGHT_COLOR_RIGHT_POSITION));
-            pegsInWrongPosition
-                .forEach(color => hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION));
+                for (var i = 0; i < colorMatches; i++) {
+                    hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION);
+                }
+            });
 
             this.setState({hints: hints});
-            console.log('correct position:', pegsInCorrectPosition);
-            console.log('wrong position:', pegsInWrongPosition);
         }
+
         this.endGame();
     }
     endGame = () => {
