@@ -30,8 +30,6 @@ export default class Mastermind extends React.Component {
             codedPegs.push(codedPeg);
         }
         this.setState({codedPegs: codedPegs});
-
-        console.log(codedPegs);
     }
     
     setSelectedPegs = (color) => {
@@ -43,12 +41,11 @@ export default class Mastermind extends React.Component {
         }
 
         this.setState({decodedPegs: decodedPegs});
-        // console.log(decodedPegs);
     }
     submitPegs = () => {
         this.updateRow();
     }
-    updateRow = () => {
+    updateRow() {
         this.compareArrays();
         this.setState({row: this.state.row + 1, decodedPegs: [], hints: []});
     }
@@ -90,17 +87,16 @@ export default class Mastermind extends React.Component {
                 const count = decodedColorCount[color];
                 const colorMatches = Math.min(count, (codedColorCount[color] || 0));
 
-                for (var i = 0; i < colorMatches; i++) {
+                for (let i = 0; i < colorMatches; i++) {
                     hints.push(HINT_TYPES.RIGHT_COLOR_WRONG_POSITION);
                 }
             });
 
             this.setState({hints: hints});
         }
-
         this.endGame();
     }
-    endGame = () => {
+    endGame() {
         let hints = this.state.hints;
         let row = this.state.row;
         let decodedPegs = this.state.decodedPegs;
@@ -119,12 +115,12 @@ export default class Mastermind extends React.Component {
         }
     }
 
-    displayResult = () => {
+    displayResult() {
         this.setState({resultIsVisible: true});
         this.setState({reloadButtonIsVisible: true});
 
     }
-    reloadPage = () => {
+    reloadPage() {
         window.location.reload(true);
     }
     render() {
