@@ -1,8 +1,8 @@
 .row {
-  border: 1px solid lightgrey;
-  margin: 10px;
+  border: 2px solid #8d8d92;
+  margin: 20px;
   display: flex;
-  @include size(auto, 80px);
+  @include size(auto, 70px);
   align-items: center;
 }
 
